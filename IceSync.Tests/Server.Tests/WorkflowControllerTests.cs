@@ -40,19 +40,14 @@ public class WorkflowControllerTests
     }
 
     [TestMethod]
-    public async Task GetAllWorkflows_ShouldReturnInternalServerError_WhenExceptionIsThrown()
+    public async Task GetAllWorkflows_ShouldThrowException_WhenExceptionIsThrown()
     {
         // Arrange
         _workflowManagerMock.Setup(m => m.GetWorkflowsAsync()).ThrowsAsync(new Exception("Test exception"));
 
-        // Act
-        var result = await _sut.GetAllWorkflows() as ObjectResult;
-
-        // Assert
-        Assert.IsNotNull(result);
-        Assert.AreEqual(500, result.StatusCode);     
+        // Act & Assert
+        await Assert.ThrowsExceptionAsync<Exception>(async () => await _sut.GetAllWorkflows());
     }
-
 
     [TestMethod]
     public async Task RunWorkflow_ShouldReturnOkResult_WhenWorkflowRunsSuccessfully()

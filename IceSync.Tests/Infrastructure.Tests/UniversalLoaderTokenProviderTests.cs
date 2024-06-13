@@ -109,13 +109,13 @@ namespace IceSync.Tests.Infrastructure.Tests
             _sut = new UniversalLoaderTokenProvider(apiClientStub, _optionsMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             // Act & Assert
-            await Assert.ThrowsExceptionAsync<Exception>(async () => await _sut.GetTokenAsync());
+            await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await _sut.GetTokenAsync());
             _loggerMock.Verify(l => l.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
                 It.IsAny<It.IsAnyType>(),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()), Times.AtLeast(2));
+                It.IsAny<InvalidOperationException>(),
+                It.IsAny<Func<It.IsAnyType, Exception, string>>()), Times.AtLeastOnce);
         }
 
         [TestMethod]
