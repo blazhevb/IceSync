@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\IceSync.Application\IceSync.Application.csproj" />
     <ProjectReference Include="..\IceSync.Infrastructure\IceSync.Infrastructure.csproj" />
     <ProjectReference Include="..\IceSync.Persistence\IceSync.Persistence.csproj" />
