@@ -3,33 +3,44 @@ using IceSync.Infrastructure.Configurations;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Threading.Tasks;
 
-namespace IceSync.Infrastructure.Services;
-
-public class UniversalLoaderTokenProvider
+namespace IceSync.Infrastructure.Services
 {
-    private const int LeadTimeSeconds = 30;
-
-    private readonly UniversalLoaderAPIClient _apiClient;
-    private readonly CredentialsOptions _credentials;
-    private readonly ILogger<UniversalLoaderTokenProvider> _logger;
-    private readonly IMemoryCache _cache;
-
-    public UniversalLoaderTokenProvider(
-        UniversalLoaderAPIClient apiClient,
-        IOptions<CredentialsOptions> options,
-        ILogger<UniversalLoaderTokenProvider> logger,
-        IMemoryCache cache)
+    public class UniversalLoaderTokenProvider
     {
-        _apiClient = apiClient;
-        _credentials = options.Value;
-        _logger = logger;
-        _cache = cache;
-    }
+        private const int LeadTimeSeconds = 30;
 
-    public async Task<string> GetTokenAsync()
-    {
-        if(!_cache.TryGetValue("AccessToken", out string token))
+        private readonly UniversalLoaderAPIClient _apiClient;
+        private readonly CredentialsOptions _credentials;
+        private readonly ILogger<UniversalLoaderTokenProvider> _logger;
+        private readonly IMemoryCache _cache;
+
+        public UniversalLoaderTokenProvider(
+            UniversalLoaderAPIClient apiClient,
+            IOptions<CredentialsOptions> options,
+            ILogger<UniversalLoaderTokenProvider> logger,
+            IMemoryCache cache)
+        {
+            _apiClient = apiClient;
+            _credentials = options.Value;
+            _logger = logger;
+            _cache = cache;
+        }
+
+        public async Task<string> GetTokenAsync()
+        {
+            string? tokenRes = await _cache.GetOrCreateAsync("AccessToken", async entry =>
+                {
+                    string token = await RetrieveTokenAsync(entry);
+                    return token;
+                });
+
+            return tokenRes;
+        }
+
+        private async Task<string> RetrieveTokenAsync(ICacheEntry entry)
         {
             _logger.LogInformation("Token is expired or not present. Requesting a new token.");
 
@@ -50,10 +61,11 @@ public class UniversalLoaderTokenProvider
                     throw new Exception("Failed to acquire a new token.");
                 }
 
-                token = response.Access_token;
-                SetTokenCache(token, response.Expires_in);
+                string token = response.Access_token;
+                SetTokenCache(entry, token, response.Expires_in);
 
-                _logger.LogInformation($"New token acquired and stored. Token valid until {_cache.Get<DateTime>("TokenExpiryTime"):O}.");
+                _logger.LogInformation($"New token acquired and stored. Token valid until {entry.AbsoluteExpiration:O}.");
+                return token;
             }
             catch(ApiException ex)
             {
@@ -67,22 +79,20 @@ public class UniversalLoaderTokenProvider
             }
         }
 
-        return token;
-    }
-
-    private void SetTokenCache(string token, int expirationSeconds)
-    {
-        if(expirationSeconds <= 0)
+        private void SetTokenCache(ICacheEntry entry, string token, int expirationSeconds)
         {
-            string err = "Token expiration time is not defined or invalid.";
-            _logger.LogError(err);
-            throw new ArgumentException(err);
+            if(expirationSeconds <= 0)
+            {
+                string err = "Token expiration time is not defined or invalid.";
+                _logger.LogError(err);
+                throw new ArgumentException(err);
+            }
+
+            DateTime currentTime = DateTime.UtcNow;
+            DateTime expiryTime = currentTime.AddSeconds(expirationSeconds - LeadTimeSeconds);
+
+            entry.AbsoluteExpiration = expiryTime;
+            entry.Value = token;
         }
-
-        DateTime currentTime = DateTime.UtcNow;
-        DateTime expiryTime = currentTime.AddSeconds(expirationSeconds - LeadTimeSeconds);
-
-        _cache.Set("AccessToken", token, expiryTime);
-        _cache.Set("TokenExpiryTime", expiryTime, expiryTime);
     }
 }
