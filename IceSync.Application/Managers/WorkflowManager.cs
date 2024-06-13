@@ -43,7 +43,6 @@ public class WorkflowManager : IWorkflowManager
             if(!apiWorkflows.Any())
             {
                 _logger.LogWarning("No workflows found in the external service.");
-                return;
             }
 
             var workflowsToAdd = GetWorkflowsToAdd(apiWorkflows, dbWorkflows);
