@@ -58,7 +58,7 @@ namespace IceSync.Infrastructure.Services
                 if(response == null || string.IsNullOrEmpty(response.Access_token))
                 {
                     _logger.LogError("Failed to acquire a new token. The response was null or the access token was empty.");
-                    throw new Exception("Failed to acquire a new token.");
+                    throw new InvalidOperationException("Failed to acquire a new token.");
                 }
 
                 string token = response.Access_token;
