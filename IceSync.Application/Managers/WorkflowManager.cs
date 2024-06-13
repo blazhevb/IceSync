@@ -28,16 +28,8 @@ public class WorkflowManager : IWorkflowManager
 
     public async Task<bool> RunWorkflowAsync(int workflowId)
     {
-        try
-        {
-            var success = await _externalWorkflowService.RunWorkflowAsync(workflowId);
-            return success;
-        }
-        catch(Exception ex)
-        {
-            _logger.LogError(ex, $"An error occurred while running the workflow with ID {workflowId}.");
-            return false;
-        }
+        var success = await _externalWorkflowService.RunWorkflowAsync(workflowId);
+        return success;
     }
 
     public async Task SynchronizeWorkflowsAsync()
