@@ -1,5 +1,4 @@
-﻿using IceSync.Infrastructure.Contracts;
-using IceSync.Infrastructure.Services;
+﻿using IceSync.Infrastructure.Services;
 using System.Net.Http.Headers;
 
 namespace IceSync.Infrastructure.Handlers;

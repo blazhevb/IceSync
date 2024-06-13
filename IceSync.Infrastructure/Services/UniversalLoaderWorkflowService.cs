@@ -1,5 +1,4 @@
 ﻿using IceSync.Domain.Contracts;
-using IceSync.Domain.Entities;
 using IceSync.Infrastructure.ApiClients;
 using IceSync.Infrastructure.Contracts;
 using Microsoft.Extensions.Logging;
