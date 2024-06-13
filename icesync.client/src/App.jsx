@@ -1,3 +1,5 @@
+import WorkflowsPage from './pages/WorkflowsPage';
+
 const App = () => {
     return (
         <div>
