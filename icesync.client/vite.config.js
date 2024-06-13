@@ -45,7 +45,12 @@ export default defineConfig({
         }
     },
     server: {
-        proxy: { },
+        proxy: {
+            '^/api/v1/workflow': {
+                target: 'https://localhost:7209/',
+                secure: false
+            }
+        },
         port: 5173,
         https: {
             key: fs.readFileSync(keyFilePath),
