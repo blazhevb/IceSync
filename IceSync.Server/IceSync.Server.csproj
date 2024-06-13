@@ -8,6 +8,7 @@
     <SpaRoot>..\icesync.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
+    <UserSecretsId>ff570fa0-b541-4f4d-a7cb-a8ebf339b355</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
