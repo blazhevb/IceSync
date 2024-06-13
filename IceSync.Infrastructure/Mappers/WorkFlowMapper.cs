@@ -11,8 +11,8 @@ public class WorkFlowMapper : IWorkflowMapper
         target.WorkflowID = source.Id;
         target.WorkflowName = source.Name;
         target.IsActive = source.IsActive;
-        target.MultiExecBehavior = source.MultiExecBehavior;   
-        
+        target.MultiExecBehavior = source.MultiExecBehavior;
+
         return target;
     }
 }

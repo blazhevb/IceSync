@@ -26,9 +26,9 @@ public class UniversalLoaderWorkflowService : IExternalWorkflowService
         {
             var workflows = await _apiClient.WorkflowsAsync();
             var result = workflows.Select(w => _mapper.MapToDomainWorkflow(w));
-            
+
             _logger.LogInformation("Successfully fetched workflows.");
-            
+
             return result;
         }
         catch(ApiException ex)
