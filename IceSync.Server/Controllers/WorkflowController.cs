@@ -17,15 +17,8 @@ public class WorkflowController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllWorkflows()
     {
-        try
-        {
-            var workflows = await _workflowManager.GetWorkflowsAsync();
-            return Ok(workflows);
-        }
-        catch(Exception ex)
-        {
-            return StatusCode(500, new { error = "An unexpected error occurred while retrieving workflows." });
-        }
+        var workflows = await _workflowManager.GetWorkflowsAsync();
+        return Ok(workflows);
     }
 
     [HttpPost("{workflowId}/run")]
