@@ -18,13 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\icesync.client\icesync.client.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\IceSync.Application\IceSync.Application.csproj" />
+    <ProjectReference Include="..\IceSync.Infrastructure\IceSync.Infrastructure.csproj" />
+    <ProjectReference Include="..\IceSync.Persistence\IceSync.Persistence.csproj" />
+    <ProjectReference Include="..\IceSync.Workers\IceSync.Workers.csproj" />
   </ItemGroup>
 
 </Project>
