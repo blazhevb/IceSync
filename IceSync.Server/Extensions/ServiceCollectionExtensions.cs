@@ -23,8 +23,10 @@ namespace IceSync.Server.Extensions
         public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
+                            .ReadFrom.Configuration(configuration)
+                            .CreateLogger();
+
+            services.AddSerilog(Log.Logger);
 
             services.AddMemoryCache();
 
