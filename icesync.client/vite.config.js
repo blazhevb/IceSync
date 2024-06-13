@@ -47,7 +47,7 @@ export default defineConfig({
     server: {
         proxy: {
             '^/api/v1/workflow': {
-                target: 'https://localhost:7209/',
+                target: 'https://localhost:7158/',
                 secure: false
             }
         },
