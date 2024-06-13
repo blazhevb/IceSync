@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework" />
+    <PackageReference Include="MSTest.TestAdapter" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="FakeItEasy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IceSync.Application\IceSync.Application.csproj" />
+    <ProjectReference Include="..\IceSync.Domain\IceSync.Domain.csproj" />
+    <ProjectReference Include="..\IceSync.Infrastructure\IceSync.Infrastructure.csproj" />
+    <ProjectReference Include="..\IceSync.Persistence\IceSync.Persistence.csproj" />
+    <ProjectReference Include="..\IceSync.Server\IceSync.Server.csproj" />
+    <ProjectReference Include="..\IceSync.Workers\IceSync.Workers.csproj" />
+  </ItemGroup>
+
+</Project>

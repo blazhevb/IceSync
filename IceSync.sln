@@ -3,24 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Server", "IceSync.Server\IceSync.Server.csproj", "{AE0ADD23-6D40-4CE2-90E7-1EE0A51778AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Server", "IceSync.Server\IceSync.Server.csproj", "{AE0ADD23-6D40-4CE2-90E7-1EE0A51778AE}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "icesync.client", "icesync.client\icesync.client.esproj", "{1DF1076F-BAA5-4541-803F-6137B2C31BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Application", "IceSync.Application\IceSync.Application.csproj", "{3808EF26-9B26-4115-8262-D608AE904075}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Application", "IceSync.Application\IceSync.Application.csproj", "{3808EF26-9B26-4115-8262-D608AE904075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Domain", "IceSync.Domain\IceSync.Domain.csproj", "{12B503CC-4849-489D-9319-3B524D4CB960}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Domain", "IceSync.Domain\IceSync.Domain.csproj", "{12B503CC-4849-489D-9319-3B524D4CB960}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Infrastructure", "IceSync.Infrastructure\IceSync.Infrastructure.csproj", "{98B0C5E3-C11B-47B0-AC8D-B534B546B567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Infrastructure", "IceSync.Infrastructure\IceSync.Infrastructure.csproj", "{98B0C5E3-C11B-47B0-AC8D-B534B546B567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Persistence", "IceSync.Persistence\IceSync.Persistence.csproj", "{D521C808-A792-48DA-A00C-66ABE5834BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Persistence", "IceSync.Persistence\IceSync.Persistence.csproj", "{D521C808-A792-48DA-A00C-66ABE5834BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Workers", "IceSync.Workers\IceSync.Workers.csproj", "{8A63CA46-920F-40C9-9E78-DCF01E638740}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IceSync.Workers", "IceSync.Workers\IceSync.Workers.csproj", "{8A63CA46-920F-40C9-9E78-DCF01E638740}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81637F98-FAFE-4D3E-9ADA-3906EBA03158}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IceSync.Tests", "IceSync.Tests\IceSync.Tests.csproj", "{EB0BE889-98C2-43F8-87BB-552089FEB3FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{8A63CA46-920F-40C9-9E78-DCF01E638740}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A63CA46-920F-40C9-9E78-DCF01E638740}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A63CA46-920F-40C9-9E78-DCF01E638740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB0BE889-98C2-43F8-87BB-552089FEB3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB0BE889-98C2-43F8-87BB-552089FEB3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB0BE889-98C2-43F8-87BB-552089FEB3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB0BE889-98C2-43F8-87BB-552089FEB3FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
