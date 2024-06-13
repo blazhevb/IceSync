@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IceSync.Infrastructure.Contracts;
 using System.Net.Http;
 
 namespace IceSync.Tests.Infrastructure.Tests
@@ -17,7 +16,6 @@ namespace IceSync.Tests.Infrastructure.Tests
     [TestClass]
     public class UniversalLoaderWorkflowServiceTests
     {
-        private Mock<IWorkflowMapper> _mapperMock;
         private Mock<ILogger<UniversalLoaderWorkflowService>> _loggerMock;
         private UniversalLoaderWorkflowService _sut;
 
@@ -57,7 +55,6 @@ namespace IceSync.Tests.Infrastructure.Tests
         [TestInitialize]
         public void Setup()
         {
-            _mapperMock = new Mock<IWorkflowMapper>();
             _loggerMock = new Mock<ILogger<UniversalLoaderWorkflowService>>();
         }
 
@@ -72,9 +69,8 @@ namespace IceSync.Tests.Infrastructure.Tests
             var domainWorkflow = new Domain.Entities.Workflow { WorkflowID = 1, WorkflowName = "API Workflow 1", IsActive = true };
 
             var apiClientStub = new UniversalLoaderAPIClientStub(apiWorkflows);
-            _mapperMock.Setup(m => m.MapToDomainWorkflow(It.IsAny<IceSync.Infrastructure.ApiClients.Workflow>())).Returns(domainWorkflow);
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act
             var result = await _sut.GetWorkflowsAsync();
@@ -90,7 +86,7 @@ namespace IceSync.Tests.Infrastructure.Tests
             // Arrange
             var apiClientStub = new UniversalLoaderAPIClientStub(new List<IceSync.Infrastructure.ApiClients.Workflow>(), throwException: true);
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act & Assert
             await Assert.ThrowsExceptionAsync<ApiException>(async () => await _sut.GetWorkflowsAsync());
@@ -107,9 +103,8 @@ namespace IceSync.Tests.Infrastructure.Tests
             var domainWorkflow = new Domain.Entities.Workflow { WorkflowID = 1, WorkflowName = "API Workflow 1", IsActive = true };
 
             var apiClientStub = new UniversalLoaderAPIClientStub(apiWorkflows);
-            _mapperMock.Setup(m => m.MapToDomainWorkflow(It.IsAny<IceSync.Infrastructure.ApiClients.Workflow>())).Returns(domainWorkflow);
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act
             await _sut.GetWorkflowsAsync();
@@ -137,7 +132,7 @@ namespace IceSync.Tests.Infrastructure.Tests
             var workflowId = 1;
             var apiClientStub = new UniversalLoaderAPIClientStub(new List<IceSync.Infrastructure.ApiClients.Workflow>());
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act
             var result = await _sut.RunWorkflowAsync(workflowId);
@@ -159,7 +154,7 @@ namespace IceSync.Tests.Infrastructure.Tests
             var workflowId = 1;
             var apiClientStub = new UniversalLoaderAPIClientStub(new List<IceSync.Infrastructure.ApiClients.Workflow>(), runWorkflowThrowsException: true);
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act
             var result = await _sut.RunWorkflowAsync(workflowId);
@@ -181,7 +176,7 @@ namespace IceSync.Tests.Infrastructure.Tests
             var workflowId = 1;
             var apiClientStub = new UniversalLoaderAPIClientStub(new List<IceSync.Infrastructure.ApiClients.Workflow>());
 
-            _sut = new UniversalLoaderWorkflowService(apiClientStub, _mapperMock.Object, _loggerMock.Object);
+            _sut = new UniversalLoaderWorkflowService(apiClientStub, _loggerMock.Object);
 
             // Act
             await _sut.RunWorkflowAsync(workflowId);

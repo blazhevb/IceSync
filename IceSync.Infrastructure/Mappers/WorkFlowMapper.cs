@@ -1,10 +1,8 @@
-﻿using IceSync.Infrastructure.Contracts;
+﻿namespace IceSync.Infrastructure.Mappers;
 
-namespace IceSync.Infrastructure.Mappers;
-
-public class WorkFlowMapper : IWorkflowMapper
+public class WorkFlowMapper
 {
-    public Domain.Entities.Workflow MapToDomainWorkflow(ApiClients.Workflow source)
+    public static Domain.Entities.Workflow MapToDomainWorkflow(ApiClients.Workflow source)
     {
         Domain.Entities.Workflow target = new Domain.Entities.Workflow();
 

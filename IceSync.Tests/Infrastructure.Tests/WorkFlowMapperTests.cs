@@ -5,13 +5,6 @@ namespace IceSync.Tests.Infrastructure.Tests;
 [TestClass]
 public class WorkFlowMapperTests
 {
-    private readonly WorkFlowMapper _sut;
-
-    public WorkFlowMapperTests()
-    {
-        _sut = new WorkFlowMapper();
-    }
-
     [TestMethod]
     public void MapToDomainWorkflow_ShouldMapAllPropertiesCorrectly()
     {
@@ -25,7 +18,7 @@ public class WorkFlowMapperTests
         };
 
         // Act
-        var result = _sut.MapToDomainWorkflow(apiWorkflow);
+        var result = WorkFlowMapper.MapToDomainWorkflow(apiWorkflow);
 
         // Assert
         Assert.AreEqual(apiWorkflow.Id, result.WorkflowID);
@@ -47,7 +40,7 @@ public class WorkFlowMapperTests
         };
 
         // Act
-        var result = _sut.MapToDomainWorkflow(apiWorkflow);
+        var result = WorkFlowMapper.MapToDomainWorkflow(apiWorkflow);
 
         // Assert
         Assert.AreEqual(apiWorkflow.Id, result.WorkflowID);
@@ -69,7 +62,7 @@ public class WorkFlowMapperTests
         };
 
         // Act
-        var result = _sut.MapToDomainWorkflow(apiWorkflow);
+        var result = WorkFlowMapper.MapToDomainWorkflow(apiWorkflow);
 
         // Assert
         Assert.AreEqual(apiWorkflow.Id, result.WorkflowID);
@@ -91,7 +84,7 @@ public class WorkFlowMapperTests
         };
 
         // Act
-        var result = _sut.MapToDomainWorkflow(apiWorkflow);
+        var result = WorkFlowMapper.MapToDomainWorkflow(apiWorkflow);
 
         // Assert
         Assert.AreEqual(apiWorkflow.Id, result.WorkflowID);

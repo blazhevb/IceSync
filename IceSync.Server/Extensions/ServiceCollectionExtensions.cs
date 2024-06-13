@@ -3,9 +3,7 @@ using IceSync.Domain.Contracts;
 using IceSync.Domain.Contracts.Managers;
 using IceSync.Infrastructure.ApiClients;
 using IceSync.Infrastructure.Configurations;
-using IceSync.Infrastructure.Contracts;
 using IceSync.Infrastructure.Handlers;
-using IceSync.Infrastructure.Mappers;
 using IceSync.Infrastructure.Services;
 using IceSync.Persistence.Data;
 using IceSync.Persistence.Repositories;
@@ -64,8 +62,6 @@ namespace IceSync.Server.Extensions
 
                 return new UniversalLoaderTokenProvider(apiClient, credentialsOptions, logger, memoryCache);
             });
-
-            services.AddSingleton<IWorkflowMapper, WorkFlowMapper>();
 
             services.AddScoped<IWorkflowRepository, WorkflowRepository>();
             services.AddScoped<IExternalWorkflowService, UniversalLoaderWorkflowService>();

@@ -1,6 +1,6 @@
 ﻿using IceSync.Domain.Contracts;
 using IceSync.Infrastructure.ApiClients;
-using IceSync.Infrastructure.Contracts;
+using IceSync.Infrastructure.Mappers;
 using Microsoft.Extensions.Logging;
 
 namespace IceSync.Infrastructure.Services;
@@ -9,12 +9,10 @@ public class UniversalLoaderWorkflowService : IExternalWorkflowService
 {
     private readonly UniversalLoaderAPIClient _apiClient;
     private readonly ILogger<UniversalLoaderWorkflowService> _logger;
-    private readonly IWorkflowMapper _mapper;
 
-    public UniversalLoaderWorkflowService(UniversalLoaderAPIClient apiClient, IWorkflowMapper mapper, ILogger<UniversalLoaderWorkflowService> logger)
+    public UniversalLoaderWorkflowService(UniversalLoaderAPIClient apiClient, ILogger<UniversalLoaderWorkflowService> logger)
     {
         _apiClient = apiClient;
-        _mapper = mapper;
         _logger = logger;
     }
 
@@ -25,7 +23,7 @@ public class UniversalLoaderWorkflowService : IExternalWorkflowService
         try
         {
             var workflows = await _apiClient.WorkflowsAsync();
-            var result = workflows.Select(w => _mapper.MapToDomainWorkflow(w));
+            var result = workflows.Select(w => WorkFlowMapper.MapToDomainWorkflow(w));
 
             _logger.LogInformation("Successfully fetched workflows.");
 
