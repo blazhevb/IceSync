@@ -84,7 +84,7 @@ dotnet run
 3. **Run the development server**:
 
     ```sh
-    npm run dev
+    npm run
     ```
 ## User Interface
 
